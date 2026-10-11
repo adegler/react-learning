@@ -6,7 +6,7 @@ function Input({ guesses, setGuesses }) {
     if (word.length != 5) {
       return;
     }
-    guesses.push(word);
+    guesses.push({ key: crypto.randomUUID(), word: word });
     const nextGuesses = [...guesses];
     setGuesses(nextGuesses);
     setWord('');
