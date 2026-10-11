@@ -1,13 +1,14 @@
 import React from 'react';
 
-function Input({ guess, setGuess }) {
+function Input({ guesses, setGuesses }) {
   [word, setWord] = React.useState('');
   function handleSubmit(word) {
     if (word.length != 5) {
       return;
     }
-
-    setGuess(word);
+    guesses.push(word);
+    const nextGuesses = [...guesses];
+    setGuesses(nextGuesses);
     setWord('');
   }
 
