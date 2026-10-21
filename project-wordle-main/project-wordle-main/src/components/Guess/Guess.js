@@ -1,13 +1,22 @@
 import React from 'react';
 import { range } from '../../utils';
+import { checkGuess } from '../../game-helpers';
 
-function Guess({ guess }) {
-  console.log('in guess');
-  console.log(guess);
+function EmptyGuess() {
+  return Array.from({ length: 5 }, () => ({ letter: '', status: null }));
+}
+
+function Guess({ guess, answer }) {
+  const checkedGuess = checkGuess(guess.word, answer) ?? EmptyGuess();
+
+  console.log(checkedGuess);
+
   return (
     <p className="guess">
-      {[...guess.word].map((letter) => (
-        <span className="cell">{letter}</span>
+      {checkedGuess.map(({ letter, status }, index) => (
+        <span key={index} className={`cell ${status}`}>
+          {letter}
+        </span>
       ))}
     </p>
   );
